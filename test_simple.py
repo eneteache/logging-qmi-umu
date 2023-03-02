@@ -110,7 +110,7 @@ def get_capabilities_ready(qmiclient,result,qmidev):
     except GLib.GError as error:
         sys.stderr.write("Couldn't query device capabilities: %s\n" % error.message)
 
-    qmiclient.get_ids(None, 10, None, get_ids_ready, qmidev)
+    
 
 
 def allocate_client_ready(qmidev,result,user_data=None):
@@ -122,6 +122,7 @@ def allocate_client_ready(qmidev,result,user_data=None):
         return
 
     qmiclient.get_capabilities(None, 10, None, get_capabilities_ready, qmidev)
+    qmiclient.get_ids(None, 10, None, get_ids_ready, qmidev)
 
 
 def open_ready(qmidev,result,user_data=None):
