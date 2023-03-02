@@ -6,7 +6,6 @@ from gi.repository import GLib, Gio, Qmi
 from modules.services.nas_client import NASClient
 from modules.services.dms_client import DMSClient
 from modules.services.wds_client import WDSClient
-from modules.device.device import Device
 
 main_loop = None
 global device_clients
@@ -22,13 +21,13 @@ def open_ready(qmidev,result,user_data=None):
         main_loop.quit()
         return
     
-    nas_client = NASClient(qmidev, main_loop)
-    dms_client = DMSClient(qmidev, main_loop)
-    wds_client = WDSClient(qmidev, main_loop)
+    #nas_client = NASClient(qmidev, main_loop, Qmi.Service.DMS)
+    dms_client = DMSClient(qmidev, main_loop, Qmi.Service.DMS)
+    #wds_client = WDSClient(qmidev, main_loop)
 
-    nas_client.get_nas_serving()
+    #nas_client.get_nas_serving()
     dms_client.get_dms_info()
-    wds_client.get_wds_info()
+    #wds_client.get_wds_info()
 
 def new_ready(unused,result,user_data=None):
     try:

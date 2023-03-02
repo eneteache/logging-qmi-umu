@@ -1,32 +1,15 @@
 import sys, signal, gi
 
+
+
 gi.require_version('Qmi', '1.0')
 from gi.repository import GLib, Gio, Qmi
-from modules.device.device import Device
-class NASClient:
+from modules.services.client import Client
+
+class NASClient(Client):
     
-    num_requests = 0
-    global device
-    device = Device()
-
-    def __init__(self, qmidev, main_loop) -> None:
-        self.qmidev = qmidev
-        self.main_loop = main_loop
-        device.set_device_clients(device.get_device_clients()+1)
-        print("device_clients: ", device.get_device_clients())
-
-    #getters
-    def get_qmidev(self):
-        return self.qmidev
-    
-    def get_main_loop(self):
-        return self.main_loop
-        
-    def get_num_requests(self):
-        return self.num_requests
-
-    def set_num_requests(self, num_requests):
-        self.num_requests = num_requests
+    def __init__(self, qmidev, main_loop, service_type) -> None:
+        super().__init__(qmidev, main_loop, service_type)
 
     def get_nas_serving(self):
 
@@ -35,8 +18,12 @@ class NASClient:
         
         def set_num_requests(num_requests):
             self.set_num_requests(num_requests)
+        
+        def get_device():
+            return self.device
 
         def device_close_ready(qmidev,result,user_data=None):
+            device = get_device()
             device.set_device_clients(device.get_device_clients()-1)
             try:
                 qmidev.close_finish(result)
@@ -45,6 +32,7 @@ class NASClient:
             main_loop.quit()
 
         def device_close(qmidev):
+            device = get_device()
             device.set_device_clients(device.get_device_clients()-1)
             print("num_requests: ", get_num_requests())
             print("device_clients: ", device.get_device_clients())
@@ -73,7 +61,7 @@ class NASClient:
                 plmn_mcc, plmn_mnc, plmn_description = output.get_current_plmn()
 
                 print()
-                print("NAS registration State: %s" % Qmi.NasRegistrationState.get_string(registration_state))
+                print("NAS registration State:  %s" % Qmi.NasRegistrationState.get_string(registration_state))
 
                 #FIXME there are potentially more than one radio interface on the modem so consider that!
                 network_mode = ""
@@ -82,15 +70,14 @@ class NASClient:
                         network_mode += ", "
                     network_mode += Qmi.NasRadioInterface.get_string(radioiface)
 
-                print("NAS networkmode:       %s" % network_mode)
-                print("NAS MCC:               %s" % plmn_mcc)
-                print("NAS MNC:               %s" % plmn_mnc)
-                print("NAS Description:       %s" % plmn_description)
+                print("NAS networkmode:         %s" % network_mode)
+                print("NAS MCC:                 %s" % plmn_mcc)
+                print("NAS MNC:                 %s" % plmn_mnc)
+                print("NAS Description:         %s" % plmn_description)
                 print()
                 
             except GLib.GError as error:
                 sys.stderr.write("Couldn't get serving system information: %s\n" % error.message)
-
 
             release_client(qmidev, nas_qmiclient)
 
