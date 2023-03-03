@@ -155,6 +155,14 @@ def reset_usb_device(dev_path):
         print('Failed to reset device! Error: %s' % ex)
         sys.exit(-1)
 
+def reset_usb_device_manual(dev_path):
+    USBDEVFS_RESET = 21780
+    try:
+        f = open(dev_path, 'w', os.O_WRONLY)
+        fcntl.ioctl(f, USBDEVFS_RESET, 0)
+        return
+    except Exception as ex:
+        return Exception('Failed to reset device! Error: %s' % ex)
 
 if 'path' in option:
     reset_usb_device(option2)

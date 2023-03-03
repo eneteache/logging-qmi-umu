@@ -1,4 +1,5 @@
-import sys, signal, gi
+from configparser import ConfigParser
+import os, sys, signal, gi
 import time
 
 gi.require_version('Qmi', '1.0')
@@ -6,10 +7,20 @@ from gi.repository import GLib, Gio, Qmi
 from modules.services.nas_client import NASClient
 from modules.services.dms_client import DMSClient
 from modules.services.wds_client import WDSClient
+import fcntl
 
 main_loop = None
 global device_clients
 
+def reset_usb_device_manual(dev_path):
+    USBDEVFS_RESET = 21780
+    try:
+        f = open(dev_path, 'w', os.O_WRONLY)
+        fcntl.ioctl(f, USBDEVFS_RESET, 0)
+        return
+    except Exception as ex:
+        return Exception('Failed to reset device! Error: %s' % ex)
+    
 def signal_handler(data):
     main_loop.quit()
 
@@ -21,12 +32,13 @@ def open_ready(qmidev,result,user_data=None):
         main_loop.quit()
         return
     
-    #nas_client = NASClient(qmidev, main_loop, Qmi.Service.DMS)
     dms_client = DMSClient(qmidev, main_loop, Qmi.Service.DMS)
+    #nas_client = NASClient(qmidev, main_loop, Qmi.Service.DMS)
     #wds_client = WDSClient(qmidev, main_loop)
 
-    #nas_client.get_nas_serving()
+    dms_client.reset_dms_device()
     dms_client.get_dms_info()
+    #nas_client.get_nas_serving()
     #wds_client.get_wds_info()
 
 def new_ready(unused,result,user_data=None):
@@ -47,6 +59,17 @@ if __name__ == "__main__":
         sys.stderr.write('error: wrong number of arguments\n')
         sys.stdout.write('usage: simple-tester-python <DEVICE>\n')
         sys.exit(1)
+
+    parser = ConfigParser()
+    parser.read('config.ini')
+    dev_path = parser["InfoDevice"]["path"]
+
+    print(dev_path)
+    try:
+        reset_usb_device_manual(dev_path)
+        print('Successfully reset %s' % dev_path)
+    except Exception as ex:
+        sys.exit(-1)
 
     file = Gio.File.new_for_path(sys.argv[1])
     Qmi.Device.new (file, None, new_ready, None)

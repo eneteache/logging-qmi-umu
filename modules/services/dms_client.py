@@ -11,6 +11,9 @@ class DMSClient(Client):
 
     def get_dms_info(self): 
         
+        def get_cid():
+            return self.get_cid()
+        
         def get_num_requests():
             return self.get_num_requests()
         
@@ -118,69 +121,70 @@ class DMSClient(Client):
                 sys.stderr.write("Couldn't allocate QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
-            print("+++ CID: ", qmiclient.get_cid())
+            
             set_num_requests(get_num_requests()+2)
             qmiclient.get_capabilities(None, 10, None, get_capabilities_ready, qmidev)
             qmiclient.get_ids(None, 10, None, get_ids_ready, qmidev)
 
         main_loop = self.get_main_loop()
         qmidev = self.get_qmidev()
-        qmidev.allocate_client(Qmi.Service.DMS, Qmi.CID_NONE, 10, None, allocate_client_ready, None)
+        qmidev.allocate_client(self.service_type, self.cid, 10, None, allocate_client_ready, None)
 
-    # def reset_dms_device(self):
+    def reset_dms_device(self):
 
-    #     def get_num_requests():
-    #         return self.num_requests
+        def get_num_requests():
+            return self.num_requests
         
-    #     def set_num_requests(num_requests):
-    #         self.num_requests = num_requests
+        def set_num_requests(num_requests):
+            self.num_requests = num_requests
 
-    #     def get_device():
-    #         return self.device
+        def get_device():
+            return self.device
 
-    #     def device_close_ready(qmidev,result,user_data=None):
+        def device_close_ready(qmidev,result,user_data=None):
             
-    #         try:
-    #             qmidev.close_finish(result)
-    #         except GLib.GError as error:
-    #             sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
-    #         main_loop.quit()
+            try:
+                qmidev.close_finish(result)
+            except GLib.GError as error:
+                sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
+            main_loop.quit()
 
-    #     def device_close(qmidev):
-    #         device = get_device()
-    #         device.set_device_clients(device.get_device_clients()-1)
-    #         print("dms_num_requests: ", get_num_requests())
-    #         print("dms_device_clients: ", device.get_device_clients())
-    #         if (get_num_requests() == 0 and device.get_device_clients() == 0):
-    #             qmidev.close_async(10, None, device_close_ready, None)
+        def device_close(qmidev):
+            device = get_device()
+            device.set_device_clients(device.get_device_clients()-1)
+            print("dms_num_requests: ", get_num_requests())
+            print("dms_device_clients: ", device.get_device_clients())
+            if (get_num_requests() == 0 and device.get_device_clients() == 0):
+                qmidev.close_async(10, None, device_close_ready, None)
 
-    #     def release_client_ready(qmidev,result,user_data=None):
-    #         try:
-    #             qmidev.release_client_finish(result)
-    #         except GLib.GError as error:
-    #             sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
-    #         device_close(qmidev)
-
-    #     def release_client(qmidev,qmiclient):
+        def release_client_ready(qmidev,result,user_data=None):
+            try:
+                qmidev.release_client_finish(result)
+            except GLib.GError as error:
+                sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
             
-    #         set_num_requests(get_num_requests()-1)
-    #         if (get_num_requests() == 0):
-    #             qmidev.release_client(qmiclient, Qmi.DeviceReleaseClientFlags.RELEASE_CID, 10, None, release_client_ready, None)
+            print("successful")
 
-    #     def reset_ready(qmiclient,result,qmidev):
+        def release_client(qmidev,qmiclient):
+            
+            qmidev.release_client(qmiclient, Qmi.DeviceReleaseClientFlags.RELEASE_CID, 10, None, release_client_ready, None)
 
-    #         pass
-    #     def allocate_client_ready(qmidev,result,user_data=None):
-    #         try:
-    #             qmiclient = qmidev.allocate_client_finish(result)
-    #         except GLib.GError as error:
-    #             sys.stderr.write("Couldn't allocate QMI client: %s\n" % error.message)
-    #             device_close(qmidev)
-    #             return
+        def reset_ready(qmiclient,result,qmidev):
 
-    #         set_num_requests(get_num_requests()+2)
-    #         qmiclient.get_capabilities(None, 10, None, reset_ready, qmidev)
+            qmiclient.reset_finish(result)
+            release_client(qmidev, qmiclient)
 
-    #     main_loop = self.get_main_loop()
-    #     qmidev = self.get_qmidev()
-    #     qmidev.allocate_client(Qmi.Service.DMS, Qmi.CID_NONE, 10, None, allocate_client_ready, None)
+        def allocate_client_ready(qmidev,result,user_data=None):
+            try:
+                qmiclient = qmidev.allocate_client_finish(result)
+            except GLib.GError as error:
+                sys.stderr.write("Couldn't allocate QMI client: %s\n" % error.message)
+                device_close(qmidev)
+                return
+
+            qmiclient.reset(None, 10, None, reset_ready, qmidev)
+            
+
+        main_loop = self.get_main_loop()
+        qmidev = self.get_qmidev()
+        qmidev.allocate_client(Qmi.Service.DMS, Qmi.CID_NONE, 10, None, allocate_client_ready, None)
