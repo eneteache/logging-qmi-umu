@@ -1,12 +1,14 @@
 import sys, signal, gi
 
+import time
 gi.require_version('Qmi', '1.0')
 from gi.repository import GLib, Gio, Qmi
 from modules.services.client import Client
 
 class DMSClient(Client):
 
-    def __init__(self, qmidev, main_loop, service_type) -> None:
+    def __init__(self, qmidev, main_loop) -> None:
+        service_type = Qmi.Service.DMS
         super().__init__(qmidev, main_loop, service_type)
 
     def get_dms_info(self): 
@@ -98,6 +100,8 @@ class DMSClient(Client):
                 output.get_result()
 
                 maxtxrate, maxrxrate, dataservicecaps, simcaps, radioifaces = output.get_info()
+
+                print("")
                 print("max tx channel rate:     %u" % maxtxrate)
                 print("max rx channel rate:     %u" % maxrxrate)
                 print("data service:            %s" % Qmi.DmsDataServiceCapability.get_string(dataservicecaps))
@@ -128,7 +132,8 @@ class DMSClient(Client):
 
         main_loop = self.get_main_loop()
         qmidev = self.get_qmidev()
-        qmidev.allocate_client(self.service_type, self.cid, 10, None, allocate_client_ready, None)
+
+        qmidev.allocate_client(self.service_type, Qmi.CID_NONE, 10, None, allocate_client_ready, None)
 
     def reset_dms_device(self):
 

@@ -9,9 +9,10 @@ from modules.services.client import Client
 class WDSClient(Client):
     
     def __init__(self, qmidev, main_loop) -> None:
-        super().__init__(qmidev, main_loop)
+        service_type = Qmi.Service.WDS
+        super().__init__(qmidev, main_loop, service_type)
 
-    def get_nas_serving(self):
+    def get_wds_info(self):
 
         def get_num_requests():
             return self.get_num_requests()
@@ -57,22 +58,21 @@ class WDSClient(Client):
                 
                 print("")
                 print("WDS TX PACKETS OK:       %s" % output.get_tx_packets_ok())
-                print("WDS TX_PACKETS_ERROR:    %s" % output.get_tx_packets_error())
-                
                 print("WDS RX_PACKETS_OK:       %s" % output.get_rx_packets_ok())
+
+                print("WDS TX_PACKETS_ERROR:    %s" % output.get_tx_packets_error())
                 print("WDS RX_PACKETS_ERROR:    %s" % output.get_rx_packets_error())
+
+                print("WDS TX_OVERFLOWS:        %s" % output.get_tx_overflows())
+                print("WDS RX_OVERFLOWS:        %s" % output.get_rx_overflows())
                 
                 print("WDS TX_BYTES_OK:         %s" % output.get_tx_bytes_ok())
                 print("WDS RX_BYTES_OK:         %s" % output.get_rx_bytes_ok())
                 
-                print("WDS TX_OVERFLOWS:        %s" % output.get_tx_overflows())
-                print("WDS RX_OVERFLOWS:        %s" % output.get_rx_overflows())
-                
                 print("WDS TX_PACKETS_DROPPED:  %s" % output.get_tx_packets_dropped())
                 print("WDS RX_PACKETS_DROPPED:  %s" % output.get_rx_packets_dropped())
                 print("")
-                
-                
+
             except GLib.GError as error:
                 sys.stderr.write("Couldn't get serving system information: %s\n" % error.message)
 
@@ -80,7 +80,6 @@ class WDSClient(Client):
             release_client(qmidev, wds_client)
 
         def allocate_wds_client_ready(qmidev, result, user_data=None):
-            device = get_device()
 
             try:
                 wds_client = qmidev.allocate_client_finish(result)
@@ -89,14 +88,6 @@ class WDSClient(Client):
                 sys.stderr.write("Couldn't allocate WDS QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
-
-            
-            # input_value = Qmi.MessageWdsGetPacketStatisticsInput()
-            # #wds_client.get_packet_statistics(input_value, 10, None, get_wds_packet_statistics_ready, qmidev)
-            
-            # #set all masks
-            # print(Qmi.WdsPacketStatisticsMaskFlag.TX_PACKETS_OK.value)
-            # set_num_requests(len(defines.PacketStatisticsMaskFlags))
             
             # print(res)
             new_mask = 0
@@ -104,10 +95,12 @@ class WDSClient(Client):
                 new_mask = new_mask + defines.PacketStatisticsMaskFlags[flag]
                 #print(new_mask)
                 pass
-                
+            #print(new_mask)
+            
             input_value = Qmi.MessageWdsGetPacketStatisticsInput()
             input_value.set_mask(Qmi.WdsPacketStatisticsMaskFlag(new_mask))
-            device.set_device_clients(1)
+
+            set_num_requests(get_num_requests()+1)
             wds_client.get_packet_statistics(input_value, 10, None, get_wds_packet_statistics_ready, qmidev)
 
             
@@ -130,4 +123,4 @@ class WDSClient(Client):
         qmidev = self.get_qmidev()
         main_loop = self.get_main_loop()
 
-        qmidev.allocate_client(Qmi.Service.WDS, Qmi.CID_NONE, 10, None, allocate_wds_client_ready, None)
+        qmidev.allocate_client(self.service_type, Qmi.CID_NONE, 10, None, allocate_wds_client_ready, None)

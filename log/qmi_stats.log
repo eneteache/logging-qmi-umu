@@ -1,0 +1,269 @@
+2023-03-06 12:41:06,561 - INFO - new DMS client - CID: 1 
+NoneType: None
+2023-03-06 12:41:06,562 - INFO - new NAS client - CID: 1 
+NoneType: None
+2023-03-06 12:41:06,562 - INFO - new NAS client - CID: 1 
+NoneType: None
+2023-03-06 12:41:06,562 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:41:06,562 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:41:06,562 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,851 - INFO - new DMS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,852 - INFO - new NAS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,852 - INFO - new NAS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,852 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,852 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:12,852 - INFO - new WDS client - CID: 1 
+NoneType: None
+2023-03-06 12:42:31,241 - INFO - new DMS client - CID: 1 
+2023-03-06 12:42:31,241 - INFO - new NAS client - CID: 1 
+2023-03-06 12:42:31,241 - INFO - new NAS client - CID: 1 
+2023-03-06 12:42:31,242 - INFO - new WDS client - CID: 1 
+2023-03-06 12:42:31,242 - INFO - new WDS client - CID: 1 
+2023-03-06 12:42:31,242 - INFO - new WDS client - CID: 1 
+2023-03-06 12:45:56,392 - INFO - new DMS client - CID: 1 
+2023-03-06 12:45:56,393 - INFO - new NAS client - CID: 1 
+2023-03-06 12:45:56,393 - INFO - new NAS client - CID: 1 
+2023-03-06 12:45:56,393 - INFO - new WDS client - CID: 1 
+2023-03-06 12:45:56,393 - INFO - new WDS client - CID: 1 
+2023-03-06 12:45:56,393 - INFO - new WDS client - CID: 1 
+2023-03-06 12:47:01,444 - INFO - new DMS client - CID: 1 
+2023-03-06 12:47:11,692 - INFO - new NAS client - CID: 1 
+2023-03-06 12:47:11,692 - INFO - new NAS client - CID: 1 
+2023-03-06 12:47:17,894 - INFO - new WDS client - CID: 1 
+2023-03-06 12:47:17,894 - INFO - new WDS client - CID: 1 
+2023-03-06 12:47:17,894 - INFO - new WDS client - CID: 1 
+2023-03-06 12:48:13,895 - INFO - new DMS client - CID: 1 
+2023-03-06 12:48:18,513 - INFO - new NAS client - CID: 1 
+2023-03-06 12:48:18,513 - INFO - new NAS client - CID: 1 
+2023-03-06 12:48:36,700 - INFO - new WDS client - CID: 1 
+2023-03-06 12:48:36,700 - INFO - new WDS client - CID: 1 
+2023-03-06 12:48:36,700 - INFO - new WDS client - CID: 1 
+2023-03-06 12:53:57,934 - INFO - new DMS client - CID: 1 
+2023-03-06 12:53:57,934 - INFO - new NAS client - CID: 1 
+2023-03-06 12:53:57,934 - INFO - new WDS client - CID: 1 
+2023-03-06 12:57:38,752 - INFO - new DMS client - CID: 1 
+2023-03-06 12:57:38,752 - INFO - new NAS client - CID: 1 
+2023-03-06 12:57:38,752 - INFO - new WDS client - CID: 1 
+2023-03-06 12:57:51,471 - INFO - new DMS client - CID: 1 
+2023-03-06 12:57:51,472 - INFO - new NAS client - CID: 1 
+2023-03-06 12:57:51,472 - INFO - new WDS client - CID: 1 
+2023-03-06 12:57:56,194 - ERROR - device with sn 612EDE63 not found
+2023-03-06 12:58:41,327 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:43,139 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:45,108 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:46,369 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:47,685 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:48,998 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:52,273 - ERROR - device with 612EDE63 sn not found
+2023-03-06 12:58:54,670 - ERROR - device with 612EDE63 sn not found
+2023-03-06 13:00:27,178 - INFO - new DMS client - CID: 1 
+2023-03-06 13:00:27,178 - INFO - new NAS client - CID: 1 
+2023-03-06 13:00:27,178 - INFO - new WDS client - CID: 1 
+2023-03-06 13:06:02,399 - INFO - new DMS client - CID: 1 
+2023-03-06 13:06:02,399 - INFO - new NAS client - CID: 1 
+2023-03-06 13:06:02,399 - INFO - new WDS client - CID: 1 
+2023-03-06 13:07:03,943 - INFO - new DMS client - CID: 1 
+2023-03-06 13:07:03,944 - INFO - new NAS client - CID: 1 
+2023-03-06 13:07:03,944 - INFO - new WDS client - CID: 1 
+2023-03-06 13:08:05,507 - ERROR - device with 612EDE63 sn not found
+2023-03-06 13:08:17,485 - INFO - new DMS client - CID: 1 
+2023-03-06 13:08:17,485 - INFO - new NAS client - CID: 1 
+2023-03-06 13:08:17,485 - INFO - new WDS client - CID: 1 
+2023-03-06 13:10:01,373 - INFO - new DMS client - CID: 1 
+2023-03-06 13:10:01,373 - INFO - new NAS client - CID: 1 
+2023-03-06 13:10:01,374 - INFO - new WDS client - CID: 1 
+2023-03-06 13:10:24,912 - INFO - new DMS client - CID: 1 
+2023-03-06 13:10:24,912 - INFO - new NAS client - CID: 1 
+2023-03-06 13:10:24,912 - INFO - new WDS client - CID: 1 
+2023-03-06 13:23:57,916 - INFO - new DMS client - CID: 1 
+2023-03-06 13:23:57,917 - INFO - new NAS client - CID: 1 
+2023-03-06 13:23:57,917 - INFO - new WDS client - CID: 1 
+2023-03-06 13:24:22,672 - INFO - new DMS client - CID: 1 
+2023-03-06 13:24:22,673 - INFO - new NAS client - CID: 1 
+2023-03-06 13:24:22,673 - INFO - new WDS client - CID: 1 
+2023-03-06 13:27:57,555 - INFO - new DMS client - CID: 1 
+2023-03-06 13:27:57,555 - INFO - new NAS client - CID: 1 
+2023-03-06 13:27:57,556 - INFO - new WDS client - CID: 1 
+2023-03-06 13:28:45,374 - INFO - new DMS client - CID: 1 
+2023-03-06 13:28:45,374 - INFO - new NAS client - CID: 1 
+2023-03-06 13:28:45,374 - INFO - new WDS client - CID: 1 
+2023-03-06 13:29:05,353 - INFO - new DMS client - CID: 1 
+2023-03-06 13:29:05,353 - INFO - new NAS client - CID: 1 
+2023-03-06 13:29:05,353 - INFO - new WDS client - CID: 1 
+2023-03-06 13:29:42,143 - INFO - new DMS client - CID: 1 
+2023-03-06 13:29:42,144 - INFO - new NAS client - CID: 1 
+2023-03-06 13:29:42,144 - INFO - new WDS client - CID: 1 
+2023-03-06 13:30:11,135 - INFO - new DMS client - ID: 1 
+2023-03-06 13:30:11,135 - INFO - new NAS client - ID: 1 
+2023-03-06 13:30:11,135 - INFO - new WDS client - ID: 1 
+2023-03-06 13:30:25,576 - INFO - new DMS client - ID: 2 
+2023-03-06 13:30:25,576 - INFO - new NAS client - ID: 2 
+2023-03-06 13:30:25,576 - INFO - new WDS client - ID: 2 
+2023-03-06 13:30:33,733 - INFO - new DMS client - ID: 1 
+2023-03-06 13:30:33,733 - INFO - new NAS client - ID: 1 
+2023-03-06 13:30:33,734 - INFO - new WDS client - ID: 1 
+2023-03-06 13:42:04,596 - INFO - new DMS client - ID: 1 
+2023-03-06 13:42:04,596 - INFO - new NAS client - ID: 1 
+2023-03-06 13:42:04,596 - INFO - new WDS client - ID: 1 
+2023-03-06 15:07:10,796 - INFO - new DMS client - ID: 1 
+2023-03-06 15:07:10,797 - INFO - new NAS client - ID: 1 
+2023-03-06 15:07:10,797 - INFO - new WDS client - ID: 1 
+2023-03-06 15:21:26,289 - INFO - new DMS client - ID: 1 
+2023-03-06 15:21:26,290 - INFO - new NAS client - ID: 1 
+2023-03-06 15:21:26,290 - INFO - new WDS client - ID: 1 
+2023-03-06 15:21:38,026 - INFO - new DMS client - ID: 2 
+2023-03-06 15:21:38,026 - INFO - new NAS client - ID: 2 
+2023-03-06 15:21:38,026 - INFO - new WDS client - ID: 2 
+2023-03-06 15:21:57,505 - INFO - new DMS client - ID: 2 
+2023-03-06 15:21:57,505 - INFO - new NAS client - ID: 2 
+2023-03-06 15:21:57,505 - INFO - new WDS client - ID: 2 
+2023-03-06 15:28:56,107 - INFO - new DMS client - ID: 4 
+2023-03-06 15:28:56,107 - INFO - new NAS client - ID: 8 
+2023-03-06 15:28:56,107 - INFO - new WDS client - ID: 12 
+2023-03-06 15:29:12,808 - INFO - new DMS client - ID: 4 
+2023-03-06 15:29:12,808 - INFO - new NAS client - ID: 8 
+2023-03-06 15:29:12,808 - INFO - new WDS client - ID: 12 
+2023-03-06 15:29:33,366 - INFO - new DMS client - ID: 2 
+2023-03-06 15:29:33,366 - INFO - new NAS client - ID: 4 
+2023-03-06 15:29:33,366 - INFO - new WDS client - ID: 6 
+2023-03-06 15:29:43,175 - INFO - new DMS client - ID: 1 
+2023-03-06 15:29:43,175 - INFO - new NAS client - ID: 2 
+2023-03-06 15:29:43,175 - INFO - new WDS client - ID: 3 
+2023-03-06 15:33:44,805 - INFO - new DMS client - ID: 1 
+2023-03-06 15:33:44,806 - INFO - new NAS client - ID: 2 
+2023-03-06 15:33:44,806 - INFO - new WDS client - ID: 3 
+2023-03-06 15:35:02,749 - INFO - new DMS client - ID: 1 
+2023-03-06 15:35:02,749 - INFO - new NAS client - ID: 2 
+2023-03-06 15:35:02,749 - INFO - new WDS client - ID: 3 
+2023-03-06 15:35:59,127 - INFO - new DMS client - ID: 1 
+2023-03-06 15:35:59,127 - INFO - new NAS client - ID: 2 
+2023-03-06 15:35:59,127 - INFO - new WDS client - ID: 3 
+2023-03-06 15:36:02,846 - INFO - new DMS client - ID: 1 
+2023-03-06 15:36:02,846 - INFO - new NAS client - ID: 2 
+2023-03-06 15:36:02,846 - INFO - new WDS client - ID: 3 
+2023-03-06 15:37:21,707 - INFO - new DMS client - ID: 1 
+2023-03-06 15:37:21,707 - INFO - new NAS client - ID: 2 
+2023-03-06 15:37:21,707 - INFO - new WDS client - ID: 3 
+2023-03-06 15:38:04,119 - INFO - new DMS client - ID: 1 
+2023-03-06 15:38:04,119 - INFO - new NAS client - ID: 2 
+2023-03-06 15:38:04,119 - INFO - new WDS client - ID: 3 
+2023-03-06 15:44:46,296 - INFO - new DMS client - ID: 1 
+2023-03-06 15:44:47,226 - INFO - new NAS client - ID: 2 
+2023-03-06 15:44:47,946 - INFO - new WDS client - ID: 3 
+2023-03-06 15:45:46,549 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:45:46,924 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:46:40,758 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:46:41,141 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:05,909 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:06,289 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:12,133 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:12,507 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:13,511 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:13,886 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:14,948 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:15,329 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:16,181 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:16,565 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:17,541 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:17,924 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:20,789 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:20,797 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:23,427 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:23,436 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:24,692 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:24,700 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:47:25,476 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 15:47:25,484 - ERROR - device with 612EDE63 sn not found
+2023-03-06 15:49:30,341 - ERROR - Couldn't open QMI device: endpoint hangup
+
+2023-03-06 15:49:38,130 - ERROR - Couldn't open QMI device: endpoint hangup
+
+2023-03-06 15:50:53,609 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 15:51:17,980 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 16:01:59,434 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 16:03:15,511 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 16:03:26,542 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 16:03:46,248 - ERROR - Couldn't open QMI device: Couldn't spawn the qmi-proxy
+
+2023-03-06 16:03:58,924 - INFO - new DMS client - ID: 1 
+2023-03-06 16:03:58,924 - INFO - new NAS client - ID: 2 
+2023-03-06 16:03:58,924 - INFO - new WDS client - ID: 3 
+2023-03-06 16:04:14,908 - INFO - new DMS client - ID: 1 
+2023-03-06 16:04:14,908 - INFO - new NAS client - ID: 2 
+2023-03-06 16:04:14,908 - INFO - new WDS client - ID: 3 
+2023-03-06 16:05:34,268 - INFO - new DMS client - ID: 1 
+2023-03-06 16:05:34,268 - INFO - new NAS client - ID: 2 
+2023-03-06 16:05:34,268 - INFO - new WDS client - ID: 3 
+2023-03-06 16:05:39,594 - ERROR - you need root permissions to do this
+2023-03-06 16:05:39,598 - ERROR - Couldn't open QMI device: endpoint hangup
+
+2023-03-06 16:05:52,090 - ERROR - you need root permissions to do this
+2023-03-06 16:06:36,208 - INFO - new DMS client - ID: 1 
+2023-03-06 16:06:36,208 - INFO - new NAS client - ID: 2 
+2023-03-06 16:06:36,208 - INFO - new WDS client - ID: 3 
+2023-03-06 16:18:06,949 - INFO - new DMS client - ID: 1 
+2023-03-06 16:18:06,949 - INFO - new NAS client - ID: 2 
+2023-03-06 16:18:06,949 - INFO - new WDS client - ID: 3 
+2023-03-06 16:18:35,263 - INFO - new DMS client - ID: 1 
+2023-03-06 16:18:35,263 - INFO - new NAS client - ID: 2 
+2023-03-06 16:18:35,263 - INFO - new WDS client - ID: 3 
+2023-03-06 16:18:45,354 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:45,749 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:46,794 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:47,184 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:48,734 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:49,119 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:50,030 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:50,426 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:51,550 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:51,931 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:52,990 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:53,376 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:54,414 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:54,802 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:56,686 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:57,061 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:58,142 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:58,525 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:18:59,502 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:18:59,881 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:19:01,374 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:19:01,754 - ERROR - device with 612EDE63 sn not found
+2023-03-06 16:19:02,987 - ERROR - Couldn't create QMI device: Couldn't query file info: Error when getting information for file “/dev/cdc-wdm2”: No such file or directory
+2023-03-06 16:19:06,669 - INFO - new DMS client - ID: 1 
+2023-03-06 16:19:06,669 - INFO - new NAS client - ID: 2 
+2023-03-06 16:19:06,669 - INFO - new WDS client - ID: 3 
+2023-03-06 16:20:08,875 - INFO - new DMS client - ID: 1 
+2023-03-06 16:20:08,875 - INFO - new NAS client - ID: 2 
+2023-03-06 16:20:08,875 - INFO - new WDS client - ID: 3 
+2023-03-06 16:23:19,707 - INFO - new DMS client - ID: 1 
+2023-03-06 16:23:19,707 - INFO - new NAS client - ID: 2 
+2023-03-06 16:23:19,708 - INFO - new WDS client - ID: 3 
+2023-03-06 16:28:17,195 - INFO - new DMS client - ID: 1 
+2023-03-06 16:28:17,195 - INFO - new NAS client - ID: 2 
+2023-03-06 16:28:17,195 - INFO - new WDS client - ID: 3 
+2023-03-06 16:28:51,565 - INFO - new DMS client - ID: 1 
+2023-03-06 16:28:51,565 - INFO - new NAS client - ID: 2 
+2023-03-06 16:28:51,565 - INFO - new WDS client - ID: 3 
+2023-03-06 16:30:11,980 - INFO - new DMS client - ID: 1 
+2023-03-06 16:30:11,980 - INFO - new NAS client - ID: 2 
+2023-03-06 16:30:11,980 - INFO - new WDS client - ID: 3 
+2023-03-06 16:30:32,280 - INFO - new DMS client - ID: 1 
+2023-03-06 16:30:32,280 - INFO - new NAS client - ID: 2 
+2023-03-06 16:30:32,280 - INFO - new WDS client - ID: 3 
+2023-03-06 16:30:53,114 - INFO - new DMS client - ID: 1 
+2023-03-06 16:30:53,114 - INFO - new NAS client - ID: 2 
+2023-03-06 16:30:53,114 - INFO - new WDS client - ID: 3 

@@ -8,7 +8,8 @@ from modules.services.client import Client
 
 class NASClient(Client):
     
-    def __init__(self, qmidev, main_loop, service_type) -> None:
+    def __init__(self, qmidev, main_loop) -> None:
+        service_type = Qmi.Service.NAS
         super().__init__(qmidev, main_loop, service_type)
 
     def get_nas_serving(self):
@@ -91,11 +92,12 @@ class NASClient(Client):
                 device_close(qmidev)
                 return
             
-            set_num_requests(1)
+            
+            set_num_requests(get_num_requests()+1)
             qmi_nas_client.get_serving_system(None, 10, None, get_nas_serving_system_ready, qmidev)
             
 
         qmidev = self.get_qmidev()
         main_loop = self.get_main_loop()
 
-        qmidev.allocate_client(Qmi.Service.NAS, Qmi.CID_NONE, 10, None, allocate_NAS_client_ready, None)
+        qmidev.allocate_client(self.service_type, Qmi.CID_NONE, 10, None, allocate_NAS_client_ready, None)
