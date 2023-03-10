@@ -7,7 +7,9 @@ class Device:
             cls.instance = object.__new__(cls)
 
             #attributes
-            cls.instance.device_clients = 0
+            cls.instance.clients = 0
+            cls.instance.status = False
+            cls.info_json = []
 
         return cls.instance
 
@@ -18,8 +20,19 @@ class Device:
         if cls.instance is None:
             return 
 
-    def get_device_clients(self):
-        return self.device_clients
+    def get_clients(self):
+        return self.clients
 
-    def set_device_clients(self, device_clients):
-        self.device_clients = device_clients
+    def set_clients(self, clients):
+        self.clients = clients
+
+    def get_info_json(self):
+        return self.info_json
+    
+    def set_info_json(self, info_json):
+        self.info_json = info_json
+    
+    def add_info_json(self, info):
+        self.info_json.append(info)
+
+

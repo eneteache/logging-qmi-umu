@@ -5,6 +5,7 @@ gi.require_version('Qmi', '1.0')
 from gi.repository import GLib, Gio, Qmi, GObject
 from modules import defines
 from modules.services.client import Client
+from modules import defines
 
 class WDSClient(Client):
     
@@ -25,26 +26,26 @@ class WDSClient(Client):
 
         def device_close_ready(qmidev,result,user_data=None):
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
+            device.set_clients(device.get_clients()-1)
             try:
                 qmidev.close_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
+                defines.log.error("Couldn't close QMI device: %s\n" % error.message)
             main_loop.quit()
 
         def device_close(qmidev):
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
-            print("num_requests: ", get_num_requests())
-            print("device_clients: ", device.get_device_clients())
-            if (get_num_requests() == 0 and device.get_device_clients() == 0):
+            device.set_clients(device.get_clients()-1)
+            defines.log.info("num_requests: %i" % get_num_requests())
+            defines.log.info("clients: %i" % device.get_clients())
+            if (get_num_requests() == 0 and device.get_clients() == 0):
                 qmidev.close_async(10, None, device_close_ready, None)
 
         def release_client_ready(qmidev,result,user_data=None):
             try:
                 qmidev.release_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't release QMI client: %s\n" % error.message)
             device_close(qmidev)
 
         def release_client(qmidev, qmiclient):
@@ -74,7 +75,7 @@ class WDSClient(Client):
                 print("")
 
             except GLib.GError as error:
-                sys.stderr.write("Couldn't get serving system information: %s\n" % error.message)
+                defines.log.error("Couldn't get packet statistics: %s" % error.message)
 
 
             release_client(qmidev, wds_client)
@@ -85,7 +86,7 @@ class WDSClient(Client):
                 wds_client = qmidev.allocate_client_finish(result)
                 
             except GLib.GError as error:
-                sys.stderr.write("Couldn't allocate WDS QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't allocate WDS QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
             

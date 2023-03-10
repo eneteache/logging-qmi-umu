@@ -1,16 +1,20 @@
+import logging
 import sys, signal, gi
 
 import time
 gi.require_version('Qmi', '1.0')
 from gi.repository import GLib, Gio, Qmi
 from modules.services.client import Client
+from modules import defines
+import json
 
 class DMSClient(Client):
 
     def __init__(self, qmidev, main_loop) -> None:
+        
         service_type = Qmi.Service.DMS
         super().__init__(qmidev, main_loop, service_type)
-
+        
     def get_dms_info(self): 
         
         def get_cid():
@@ -30,23 +34,23 @@ class DMSClient(Client):
             try:
                 qmidev.close_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
+                defines.log.error("Couldn't close QMI device: %s\n" % error.message)
             main_loop.quit()
 
         def device_close(qmidev):
 
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
-            print("dms_num_requests: ", get_num_requests())
-            print("dms_device_clients: ", device.get_device_clients())
-            if (get_num_requests() == 0 and device.get_device_clients() == 0):
+            device.set_clients(device.get_clients()-1)
+            defines.log.info("dms_num_requests: %i" % get_num_requests())
+            defines.log.info("dms_clients: %i" % device.get_clients())
+            if (get_num_requests() == 0 and device.get_clients() == 0):
                 qmidev.close_async(10, None, device_close_ready, None)
 
         def release_client_ready(qmidev,result,user_data=None):
             try:
                 qmidev.release_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't release QMI client: %s\n" % error.message)
             device_close(qmidev)
 
         def release_client(qmidev,qmiclient):
@@ -57,40 +61,47 @@ class DMSClient(Client):
 
         def get_ids_ready(qmiclient,result,qmidev):
             
-            
+            device = get_device()
             try:
                 output = qmiclient.get_ids_finish(result)
                 output.get_result()
             except GLib.GError as error:
-                sys.stderr.write("Couldn't query device ids: %s\n" % error.message)
+                defines.log.error("Couldn't query device ids: %s\n" % error.message)
                 release_client(qmidev, qmiclient)
                 return
 
+            ids = []
             try:
-                imei = output.get_imei()
-                print("imei:                    %s" % imei)
+                imei = {"dms_imei": output.get_imei()}
+                ids.append(imei)
             except:
+                defines.log.error("couldn't query device imei")
                 pass
 
             try:
-                imei_software_version = output.get_imei_software_version()
-                print("imei software version:   %s" % imei_software_version)
+                imei_software_version = {"dms_imei software version": output.get_imei_software_version()}
+                ids.append(imei_software_version)
             except:
+                defines.log.error("couldn't query device imei software version")
                 pass
 
             try:
-                meid = output.get_meid()
-                print("meid:                    %s" % meid)
-            except:
+                meid = {"dms_meid": output.get_meid()}
+                ids.append(meid)
+            except Exception as e:
+                #defines.log.error("couldn't query device meid %s" % e)
                 pass
 
             try:
-                esn = output.get_esn()
-                print("esn:                     %s" % esn)
+                esn = {"dms_esn": output.get_esn()}
+                ids.append(esn)
             except:
                 pass
             
             
+            device.add_info_json({"ids": ids})
+            print(json.dumps(device.get_info_json()))
+
             release_client(qmidev, qmiclient)
 
         def get_capabilities_ready(qmiclient,result,qmidev):
@@ -100,21 +111,25 @@ class DMSClient(Client):
                 output.get_result()
 
                 maxtxrate, maxrxrate, dataservicecaps, simcaps, radioifaces = output.get_info()
-
-                print("")
-                print("max tx channel rate:     %u" % maxtxrate)
-                print("max rx channel rate:     %u" % maxrxrate)
-                print("data service:            %s" % Qmi.DmsDataServiceCapability.get_string(dataservicecaps))
-                print("sim:                     %s" % Qmi.DmsSimCapability.get_string(simcaps))
-                networks = ""
+                
+    
+                networks = []
                 for radioiface in radioifaces:
-                    if networks != "":
-                        networks += ", "
-                    networks += Qmi.DmsRadioInterface.get_string(radioiface)
-                print("networks:                %s" % networks)
+                    networks.append(Qmi.DmsRadioInterface.get_string(radioiface))
+
+                output_json = {
+                    "dms_value_info_max_tx_channel_rate": maxtxrate,
+                    "dms_value_info_max_rx_channel_rate": maxrxrate,
+                    "dms_value_info_data_service_capability": Qmi.DmsDataServiceCapability.get_string(dataservicecaps),
+                    "dms_value_info_sim_capability": Qmi.DmsSimCapability.get_string(simcaps),
+                    "dms_value_info_radio_interface_list": networks
+                }
+
+                result_json = json.dumps(output_json)
+                print(result_json)
 
             except GLib.GError as error:
-                sys.stderr.write("Couldn't query device capabilities: %s\n" % error.message)
+                defines.log.error("Couldn't query device capabilities: %s\n" % error.message)
 
             release_client(qmidev, qmiclient)
             
@@ -122,7 +137,7 @@ class DMSClient(Client):
             try:
                 qmiclient = qmidev.allocate_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't allocate QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't allocate QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
             
@@ -151,24 +166,24 @@ class DMSClient(Client):
             try:
                 qmidev.close_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
+                defines.log.error("Couldn't close QMI device: %s\n" % error.message)
             main_loop.quit()
 
         def device_close(qmidev):
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
-            print("dms_num_requests: ", get_num_requests())
-            print("dms_device_clients: ", device.get_device_clients())
-            if (get_num_requests() == 0 and device.get_device_clients() == 0):
+            device.set_clients(device.get_clients()-1)
+            defines.log.info("dms_num_requests: ", get_num_requests())
+            defines.log.info("dms_clients: ", device.get_clients())
+            if (get_num_requests() == 0 and device.get_clients() == 0):
                 qmidev.close_async(10, None, device_close_ready, None)
 
         def release_client_ready(qmidev,result,user_data=None):
             try:
                 qmidev.release_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't release QMI client: %s\n" % error.message)
             
-            print("successful")
+            defines.log.info("dms device was reseted successfully")
 
         def release_client(qmidev,qmiclient):
             
@@ -183,7 +198,7 @@ class DMSClient(Client):
             try:
                 qmiclient = qmidev.allocate_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't allocate QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't allocate QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
 
@@ -192,4 +207,7 @@ class DMSClient(Client):
 
         main_loop = self.get_main_loop()
         qmidev = self.get_qmidev()
+
+
         qmidev.allocate_client(Qmi.Service.DMS, Qmi.CID_NONE, 10, None, allocate_client_ready, None)
+

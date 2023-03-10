@@ -5,6 +5,8 @@ import sys, signal, gi
 gi.require_version('Qmi', '1.0')
 from gi.repository import GLib, Gio, Qmi
 from modules.services.client import Client
+from modules import defines
+import json
 
 class NASClient(Client):
     
@@ -25,26 +27,26 @@ class NASClient(Client):
 
         def device_close_ready(qmidev,result,user_data=None):
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
+            device.set_clients(device.get_clients()-1)
             try:
                 qmidev.close_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't close QMI device: %s\n" % error.message)
+                defines.log.error("Couldn't close QMI device: %s\n" % error.message)
             main_loop.quit()
 
         def device_close(qmidev):
             device = get_device()
-            device.set_device_clients(device.get_device_clients()-1)
-            print("num_requests: ", get_num_requests())
-            print("device_clients: ", device.get_device_clients())
-            if (get_num_requests() == 0 and device.get_device_clients() == 0):
+            device.set_clients(device.get_clients()-1)
+            defines.log.info("num_requests: %i" % get_num_requests())
+            defines.log.info("clients: %i" % device.get_clients())
+            if (get_num_requests() == 0 and device.get_clients() == 0):
                 qmidev.close_async(10, None, device_close_ready, None)
 
         def release_client_ready(qmidev,result,user_data=None):
             try:
                 qmidev.release_client_finish(result)
             except GLib.GError as error:
-                sys.stderr.write("Couldn't release QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't release QMI client: %s\n" % error.message)
             device_close(qmidev)
 
         def release_client(qmidev, qmiclient):
@@ -59,26 +61,35 @@ class NASClient(Client):
                 output.get_result()
 
                 registration_state, cs_attach_state, ps_attach_state, selected_network, radio_interfaces = output.get_serving_system()
+                roaming_status = output.get_roaming_indicator()
                 plmn_mcc, plmn_mnc, plmn_description = output.get_current_plmn()
-
-                print()
-                print("NAS registration State:  %s" % Qmi.NasRegistrationState.get_string(registration_state))
-
-                #FIXME there are potentially more than one radio interface on the modem so consider that!
-                network_mode = ""
-                for radioiface in radio_interfaces:
-                    if network_mode != "":
-                        network_mode += ", "
-                    network_mode += Qmi.NasRadioInterface.get_string(radioiface)
-
-                print("NAS networkmode:         %s" % network_mode)
-                print("NAS MCC:                 %s" % plmn_mcc)
-                print("NAS MNC:                 %s" % plmn_mnc)
-                print("NAS Description:         %s" % plmn_description)
-                print()
                 
+
+                network_mode = []
+                for radioiface in radio_interfaces:
+                    network_mode.append(Qmi.NasRadioInterface.get_string(radioiface))
+                    
+
+                output_json = {
+                    
+                    "nas_value_serving_system_registration_state": registration_state,
+                    "nas_value_serving_system_cs_attach_state": cs_attach_state,
+                    "nas_value_serving_system_ps_attach_state": ps_attach_state,
+                    "nas_value_serving_system_selected_network": selected_network,
+                    "nas_value_serving_system_radio_interfaces": network_mode,
+
+                    "nas_value_roaming_indicator": Qmi.NasRoamingIndicatorStatus.get_string(roaming_status),
+
+                    "nas_value_current_plmn_mcc": plmn_mcc,
+                    "nas_value_current_plmn_mnc": plmn_mnc,
+                    "nas_value_current_plmn_description": plmn_description
+                }                    
+
+                result_json = json.dumps(output_json)
+                print(result_json)
+
             except GLib.GError as error:
-                sys.stderr.write("Couldn't get serving system information: %s\n" % error.message)
+                defines.log.error("Couldn't get serving system information: %s\n" % error.message)
 
             release_client(qmidev, nas_qmiclient)
 
@@ -88,7 +99,7 @@ class NASClient(Client):
                 qmi_nas_client = qmidev.allocate_client_finish(result)
                 
             except GLib.GError as error:
-                sys.stderr.write("Couldn't allocate NAS QMI client: %s\n" % error.message)
+                defines.log.error("Couldn't allocate NAS QMI client: %s\n" % error.message)
                 device_close(qmidev)
                 return
             
